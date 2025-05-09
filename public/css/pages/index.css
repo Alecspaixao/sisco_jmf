@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.cabecalho{
+    position: relative;
+}
+
+#logojmf{
+    position: absolute;
+    top: 10%;     /* ajuste a posição vertical */
+    left: 50%;    /* ajuste a posição horizontal */
+    width: 100px;  /* tamanho da imagem sobreposta */
+    height: auto;
+  
+}
