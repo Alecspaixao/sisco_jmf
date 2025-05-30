@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'sisco';
 $user = 'root'; // troque se necessário
-$pass = '';     // troque se necessário
+$pass = 'bdjmf';     // troque se necessário
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
