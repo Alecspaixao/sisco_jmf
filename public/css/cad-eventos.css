@@ -1,0 +1,414 @@
+/* ========================================= */
+/* 1. Reset Básico */
+/* ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* ========================================= */
+/* 2. Estilos do Corpo e Layout Geral */
+/* ========================================= */
+body {
+  display: flex; /* Define um container flex para a barra lateral e o conteúdo */
+  background-color: #f4f4f4;
+  transition: all 0.3s ease; /* Transição suave para quaisquer mudanças de estilo do corpo */
+}
+
+/* ========================================= */
+/* 3. Navegação da Barra Lateral (Sidebar) */
+/* ========================================= */
+.sidebar {
+  width: 60px; /* Largura quando colapsada */
+  background-color: #1d1c21;
+  color: white;
+  overflow: hidden; /* Oculta o conteúdo que excede os limites da barra lateral */
+  transition: width 0.3s ease; /* Transição suave para mudanças de largura */
+  height: 100vh; /* Ocupa 100% da altura da viewport */
+  display: flex;
+  flex-direction: column; /* Define os itens principais da sidebar em coluna */
+  flex-shrink: 0; /* Impede que a barra lateral encolha */
+  position: fixed; /* Mantém a barra lateral fixa na tela durante a rolagem */
+  z-index: 100; /* Garante que a barra lateral fique acima de outros elementos */
+  padding-top: 60px; /* Espaço para o botão hambúrguer */
+}
+
+.sidebar.expanded {
+  width: 220px; /* Largura quando expandida */
+}
+
+
+/* ========================================= */
+/* 4. Botão Hambúrguer */
+/* ========================================= */
+.hamburguer {
+  position: absolute; /* Posição absoluta em relação à sidebar */
+  top: 20px; /* Distância do topo */
+  left: 20px; /* Distância da esquerda */
+  z-index: 101; /* Garante que fique acima de outros elementos */
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0; /* Remove padding padrão para alinhamento preciso */
+  transition: all 0.3s ease; /* Adiciona transição suave para movimento se houver */
+}
+
+/* ========================================= */
+/* Itens da Sidebar (Logo e Menu) */
+/* ========================================= */
+.logo-area {
+  height: 80px;
+  display: flex; /* Mantém flex para centralizar o logo */
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%; /* Garante que ocupe a largura total */
+  opacity: 0; /* Começa oculto */
+  pointer-events: none; /* Impede cliques quando oculto */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Adiciona transição para transform */
+  transform: translateX(-20px); /* Começa ligeiramente para a esquerda */
+}
+
+.sidebar.expanded .logo-area {
+  opacity: 1; /* Mostra a área do logo quando a barra lateral é expandida */
+  pointer-events: auto;
+  transform: translateX(0); /* Volta para a posição normal */
+}
+
+.logo-placeholder > img{
+max-width: 150px;  
+}
+
+.menu-items {
+  display: flex; /* Mantém como flex para controle dos itens */
+  flex-direction: column; /* Garante que os itens fiquem em coluna */
+  padding: 20px 10px;
+  width: 100%;
+  flex-grow: 1; /* Permite que os itens do menu ocupem o espaço restante */
+  opacity: 0; /* Começa oculto */
+  pointer-events: none; /* Impede cliques quando oculto */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Adiciona transição para transform */
+  transform: translateX(-20px); /* Começa ligeiramente para a esquerda */
+}
+
+.sidebar.expanded .menu-items {
+  opacity: 1; /* Mostra os itens do menu quando a barra lateral é expandida */
+  pointer-events: auto;
+  transform: translateX(0); /* Volta para a posição normal */
+}
+
+.menu-items a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin: 4px 0;
+  border-radius: 5px;
+  transition: background 0.2s; /* Transição suave do fundo ao passar o mouse */
+  display: block; /* Faz com que os links ocupem a largura total disponível */
+}
+
+.menu-items a:hover {
+  background-color: #333;
+}
+
+
+/* ========================================= */
+/* 5. Área de Conteúdo Principal */
+/* ========================================= */
+.content {
+  padding: 20px 40px;
+  /* Ajusta a margem esquerda com base no estado da barra lateral via JavaScript para coerência */
+  transition: margin-left 0.3s ease;
+  width: 100%; /* Garante que o conteúdo ocupe a largura disponível */
+  margin-left: 60px; /* Margem inicial para a barra lateral colapsada */
+}
+
+/* Esta classe será adicionada pelo JavaScript quando a barra lateral expandir */
+body.sidebar-expanded .content {
+    margin-left: 220px; 
+    overflow: hidden;
+}
+
+/* ========================================= */
+/* 6. Cabeçalho do Formulário e Botões Seletores */
+/* ========================================= */
+.form-header {
+  margin: 20px auto;  
+  margin-top: 10px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-header .form-selector {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.form-btn {
+  padding: 10px 20px;
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.6; /* Menos opaco quando não ativo */
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.form-btn.active {
+  opacity: 1; /* Totalmente opaco quando ativo */
+  background-color: #ff8800;
+}
+
+.form-btn:hover,
+.form-btn:focus {
+  background-color: #e67e00; /* Laranja mais escuro ao passar o mouse/focar */
+  opacity: 1; /* Totalmente opaco ao passar o mouse/focar */
+  outline: none; /* Remove o contorno de foco padrão */
+}
+
+/* ========================================= */
+/* 7. Estilos Gerais de Formulário */
+/* ========================================= */
+.form-container {
+  /* Esta classe pode ser para um wrapper, mas seu HTML implica formulários diretamente sob o conteúdo */
+  animation: fadeIn 0.4s ease;
+}
+
+.form {
+  display: none; /* Oculto por padrão */
+  animation: fadeIn 0.4s ease; /* Animação de fade-in para formulários */
+}
+
+.form:not(.hidden) {
+  display: block; /* Mostra o formulário se ele não tiver a classe .hidden */
+}
+
+/* ========================================= */
+/* 8. Auxiliares de Layout Genéricos (Linhas, Colunas, Oculto) */
+/* ========================================= */
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center; /* Alinha os itens verticalmente em uma linha */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none; /* Classe utilitária para ocultar elementos */
+}
+
+/* ========================================= */
+/* 9. Estilos da Barra de Ícones */
+/* ========================================= */
+.icon-bar {
+  margin-top: 20px; /* Margem aumentada */
+  display: flex;
+  gap: 15px; /* Espaçamento aumentado entre os ícones */
+}
+
+.icon-bar button {
+  font-size: 1.5em; /* Ícones de emoji maiores */
+  padding: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s;
+}
+
+.icon-bar button:hover {
+  transform: scale(1.2); /* Aumenta o ícone ao passar o mouse */
+}
+
+/* ========================================= */
+/* 10. Marcador de Posição da Foto (Photo Placeholder) */
+/* ========================================= */
+.photo-placeholder {
+  width: 220px; /* Largura aumentada */
+  height: 256px; /* Altura aumentada (mantendo a proporção de ~4x6) */
+  background-color: #ccc;
+  display: flex;
+  flex-direction: column; /* Para empilhar "Foto 4x4" e a imagem potencial */
+  align-items: center;
+  justify-content: center;
+  font-size: 14px; /* Tamanho da fonte aumentado */
+  border: 1px solid #999;
+  border-radius: 4px;
+  overflow: hidden; /* Garante que a imagem não transborde */
+}
+
+.photo-placeholder img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Mantém a proporção da imagem */
+}
+
+/* ========================================= */
+/* 11. Estilos Específicos para o Formulário "Cadastro de Eventos" */
+/* ========================================= */
+.event-form-content {
+  display: flex;
+  gap: 40px; /* Espaço entre os campos principais e a barra lateral */
+}
+
+.event-fields {
+  flex: 1; /* Ocupa o espaço restante */
+}
+
+.event-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-width: 120px; /* Largura mínima para evitar que seja muito espremido */
+}
+
+.alerta-titulo {
+  font-weight: bold;
+}
+
+.radio-group { /* Renomeado de .checkbox-group para clareza, pois contém rádios */
+  display: flex;
+  flex-direction: column; /* Empilha os botões de rádio verticalmente */
+  gap: 8px;
+}
+
+.event-fields input,
+.event-fields textarea,
+.event-fields select { /* Adicionado select para garantir estilo consistente */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+/* ========================================= */
+/* 12. Mensagens de Alerta */
+/* ========================================= */
+.alert-success {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #c3e6cb;
+}
+
+/* ========================================= */
+/* 13. Tabela de Categoria */
+/* ========================================= */
+.categoria-tabela {
+  width: 100%;
+  border-collapse: collapse; /* Colapsa as bordas entre as células */
+  margin-top: 20px;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.categoria-tabela th,
+.categoria-tabela td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.categoria-tabela th {
+  background-color: #f0f0f0;
+}
+
+.categoria-tabela button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ========================================= */
+/* 14. Ajustes Responsivos */
+/* ========================================= */
+@media (max-width: 768px) {
+  /* Ajustes para telas menores (ex: celular) */
+
+@media (max-width: 768px) {
+  /* Barra Lateral: Garante que o conteúdo não se sobreponha quando expandido */
+  .sidebar {
+    position: absolute; /* Sobrepõe o conteúdo */
+    height: 100%;
+    z-index: 200;
+  }
+
+  body.sidebar-expanded .content {
+    margin-left: 0; /* Remove a margem lateral */
+  }
+
+  /* Ajusta o layout do formulário em telas menores */
+  .event-form-content {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    gap: 20px;
+  }
+
+  .photo-placeholder {
+    width: 100%; /* Ocupa a largura disponível */
+    height: auto; /* Altura ajustável */
+  }
+
+  .form-header .form-selector {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .icon-bar {
+    justify-content: center;
+    flex-wrap: wrap; /* Permite quebra de linha dos ícones */
+  }
+}
+
+  /* Marcador de Posição da Foto: Ajusta o tamanho para celular */
+  .photo-placeholder {
+    width: 100px;
+    height: 130px;
+  }
+
+  /* Barra Lateral do Evento: Empilha novamente para telas muito pequenas, se necessário, ou se a linha ficar muito larga */
+  .event-sidebar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Grupo de Rádios: Ajusta o espaçamento para celular */
+  .radio-group { /* Alterado de .checkbox-group */
+    gap: 20px;
+  }
+}
+
+/* ========================================= */
+/* Animações Keyframe */
+/* ========================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

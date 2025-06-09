@@ -1,0 +1,314 @@
+/* Variáveis de Cores */
+:root {
+    --primary-color: #007bff; /* Azul vibrante */
+    --secondary-color: #6c757d; /* Cinza médio */
+    --background-color: #f8f9fa; /* Branco suave */
+    --card-background: #ffffff; /* Branco puro para cartões */
+    --text-color: #343a40; /* Preto escuro para texto */
+    --border-color: #dee2e6; /* Cinza claro para bordas */
+    --hover-color: #0056b3; /* Azul mais escuro para hover */
+}
+
+/* Reset Básico e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Cabeçalho (Top Menu) */
+.top-menu {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Navegação e Links */
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--hover-color);
+}
+
+/* Botão Hamburguer (Mobile) */
+.hamburger {
+    display: none; /* Escondido por padrão em desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1000;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Animação do Hamburguer para fechar/abrir */
+.hamburger.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.is-active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Layout Principal (Login) */
+.main-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Altura da tela menos a altura do cabeçalho */
+    padding: 2rem;
+    background-color: var(--background-color);
+    gap: 3rem; /* Espaço entre as colunas */
+}
+
+.left-login {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+}
+
+.left-login h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.left-login p {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.right-login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login {
+    background-color: var(--card-background);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.card-login h1 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+.text-field {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.text-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.text-field input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.text-field input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
+
+/* --- Media Queries para Responsividade --- */
+
+/* Tablets e Telas Menores (768px a 1024px) */
+@media (max-width: 1024px) {
+    .left-login h1 {
+        font-size: 2.5rem;
+    }
+
+    .left-login p {
+        font-size: 1.1rem;
+    }
+
+    .card-login {
+        padding: 2rem;
+    }
+}
+
+/* Mobile (até 767px) */
+@media (max-width: 767px) {
+    .top-menu {
+        padding: 1rem;
+    }
+
+    .nav-links {
+        display: none; /* Esconde os links por padrão */
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 60px; /* Ajuste para a altura do cabeçalho */
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-out;
+    }
+
+    .nav-links.active {
+        display: flex; /* Mostra os links quando ativo */
+        transform: translateY(0);
+    }
+
+    .nav-links a {
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .hamburger {
+        display: block; /* Mostra o hamburguer */
+    }
+
+    .main-login {
+        flex-direction: column; /* Empilha as colunas verticalmente */
+        padding: 1.5rem;
+        min-height: calc(100vh - 60px); /* Ajusta altura para o cabeçalho mobile */
+    }
+
+    .left-login {
+        text-align: center;
+        margin-bottom: 2rem;
+        max-width: 100%; /* Ocupa largura total */
+    }
+
+    .left-login h1 {
+        font-size: 2rem;
+    }
+
+    .left-login p {
+        font-size: 1rem;
+    }
+
+    .right-login {
+        width: 100%; /* Ocupa largura total */
+    }
+
+    .card-login {
+        max-width: 90%; /* Ajusta para caber melhor em telas menores */
+        padding: 1.5rem;
+    }
+
+    .card-login h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Pequenos Smartphones (até 480px) */
+@media (max-width: 480px) {
+    .top-menu {
+        padding: 0.8rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .card-login {
+        padding: 1rem;
+    }
+
+    .card-login h1 {
+        font-size: 1.3rem;
+    }
+
+    .text-field label {
+        font-size: 0.9rem;
+    }
+
+    .text-field input {
+        font-size: 0.9rem;
+        padding: 0.7rem 0.8rem;
+    }
+
+    .btn-login {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
