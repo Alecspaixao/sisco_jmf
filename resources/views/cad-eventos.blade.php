@@ -8,40 +8,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <!-- Sidebar corrigida -->
-  <div class="sidebar" id="sidebar">
-    <button class="hamburguer" id="hamburguer">&#9776;</button>
-
-    <div class="logo-area">
-      <div class="logo-placeholder">
-        <img src="{{ asset('img/logo_sisco_jmf.png')}}" alt="Logo - SISCO">
-      </div>
-    </div>
-
-    <nav class="menu-items">
-      <a href="#">SISCO</a>
-      <a href="#">Discente</a>
-      <a href="#">Responsável Legal</a>
-      <a href="#">Colaborador</a>
-      <a href="#">Pedagógico</a>
-      <a href="#">Configuração</a>
-      <a href="#">Ajuda</a>
-      <a href="#">Opção</a>
-    </nav>
-  </div>
-
+  <!-- Sidebar -->
+<x-sidebar />
+<x-menu-horizontal />
   <!-- Conteúdo principal -->
   <div class="content">
     <div class="form-header">
       <div class="form-selector">
-        <button class="form-btn active" data-form="categoria">Categoria de Eventos</button>
-        <button class="form-btn" data-form="motivo">Gestão Motivos de Eventos</button>
-        <button class="form-btn" data-form="evento">Cadastro de Eventos</button>
+        <button class="form-btn active" data-form="form-categoria-evento">Categoria de Eventos</button>
+        <button class="form-btn" data-form="form-motivo-evento">Gestão Motivos de Eventos</button>
+        <button class="form-btn" data-form="form-cad-evento">Cadastro de Eventos</button>
       </div>
     </div>
 
     <!-- Formulário Categoria -->
     <form method="POST" id="form-categoria-evento" class="form">
+      @csrf
       <input type="hidden" name="eventoCategoria_id" id="eventoCategoria_id">
 
       <div class="row">
@@ -98,6 +80,9 @@
     </form>
 
     <!-- Formulário Evento -->
+    <!-- ... início do arquivo (sem alterações até os formulários) ... -->
+
+<!-- Formulário Evento -->
     <form method="POST" id="form-cad-evento" class="form hidden">
       @csrf
       <input type="hidden" name="evento_id" id="evento_id">
@@ -108,25 +93,26 @@
             <input type="text" id="evento_id_display" placeholder="ID" readonly>
             <input type="date" name="evento_data" id="evento_data" required>
             <input type="time" name="evento_hora" id="evento_hora" required>
+            <!-- Você pode juntar data + hora em um campo datetime no backend -->
           </div>
 
           <div class="column">
             <input type="text" name="colaborador_nome" id="colaborador_nome" 
-                   placeholder="Colaborador" readonly>
+                  placeholder="Colaborador" readonly>
             <input type="hidden" name="evento_idColaborador" id="evento_idColaborador">
             
             <input type="search" name="txt_psqCursista_evento" id="txt_psqCursista_evento" 
-                   placeholder="Pesquisar Discente" list="listaDiscentes">
+                  placeholder="Pesquisar Discente" list="listaDiscentes">
             <datalist id="listaDiscentes">
             </datalist>
             
             <input type="text" name="discente_nome" id="discente_nome" 
-                   placeholder="Discente" readonly>
+                  placeholder="Discente" readonly>
             <input type="hidden" name="evento_idDiscente" id="evento_idDiscente">
           </div>
 
           <div class="row">
-            <select name="evento_idResponsavel" id="evento_idResponsavel" required>
+            <select name="evento_idResponsavelLegal" id="evento_idResponsavelLegal" required>
               <option value="">Selecione o responsável</option>
             </select>
             <button type="button" name="btn_cadResponsavel">➕</button>
@@ -163,8 +149,8 @@
           <div class="row">
             <p class="alerta-titulo">Alerta Ativo</p>
             <div class="radio-group">
-              <label><input type="radio" name="rdn_alerta_ativo" value="1"> Sim</label>
-              <label><input type="radio" name="rdn_alerta_ativo" value="0" checked> Não</label>
+              <label><input type="radio" name="evento_alerta" value="1"> Sim</label>
+              <label><input type="radio" name="evento_alerta" value="0" checked> Não</label>
             </div>
           </div>
           
@@ -175,6 +161,7 @@
         </div>
       </div>
     </form>
+
   </div>
 
   <script src="{{ asset('js/cad-eventos.js') }}" defer></script>

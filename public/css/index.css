@@ -34,10 +34,8 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
+.logo > img{
+    width: 150px;
 }
 
 /* Navegação e Links */

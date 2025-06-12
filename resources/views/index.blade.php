@@ -9,7 +9,7 @@
 <body>
     <header class="top-menu">
         <div class="logo">
-            <img src="" alt="">
+            <img src="{{ asset('img/logo_sisco_jmf.png')}}" alt="Logo - SISCO">
         </div>
 
         <button class="hamburger" id="hamburger">

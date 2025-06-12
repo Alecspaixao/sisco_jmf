@@ -9,6 +9,6 @@ class UserController extends Controller
     //Mostar a view
     public function index()
     {
-        return view('user.index');
+        return view('index');
     }
 }

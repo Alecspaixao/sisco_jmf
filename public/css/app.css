@@ -1,0 +1,369 @@
+/* ====== RESET ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* ====== LAYOUT GERAL ====== */
+body {
+  display: flex;
+  background-color: #f4f4f4;
+  transition: all 0.3s ease;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 60px;
+  background-color: #1d1c21;
+  color: white;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: fixed;
+  z-index: 100;
+  padding-top: 60px;
+}
+.sidebar.expanded {
+  width: 220px;
+}
+
+/* Botão Hambúrguer */
+.hamburguer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 101;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+/* Logo da Sidebar */
+.logo-area {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(-20px);
+}
+.sidebar.expanded .logo-area {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.logo-placeholder > img {
+  max-width: 150px;
+}
+
+/* Menu da Sidebar */
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  width: 100%;
+  flex-grow: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(-20px);
+}
+.sidebar.expanded .menu-items {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.menu-items a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  margin: 4px 0;
+  border-radius: 5px;
+  transition: background 0.2s;
+  display: block;
+}
+.menu-items a:hover {
+  background-color: #333;
+}
+
+/* Para mover menu + conteúdo junto com a sidebar */
+.main-wrapper {
+  margin-left: 60px;
+  transition: margin-left 0.3s ease;
+}
+.sidebar.expanded ~ .main-wrapper {
+  margin-left: 220px;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #b30000;
+}
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+
+/* ====== MENU HORIZONTAL ====== */
+.horizontal-menu {
+  display: flex;
+  justify-content: center; /* Centraliza o grupo */
+  gap: 20px; /* Espaçamento igual */
+  padding: 15px 0;
+  background: #f8f9fa;
+  border-bottom: 1px solid #ccc;
+  margin-left: 60px;
+  transition: margin-left 0.3s ease;
+}
+.sidebar.expanded ~ .main-wrapper .horizontal-menu {
+  margin-left: 220px;
+}
+.horizontal-menu a {
+  flex: 1 1 200px; /* Cresce igualmente */
+  text-align: center;
+  padding: 12px 20px;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  max-width: 250px;
+}
+.horizontal-menu a.active,
+.horizontal-menu a:hover {
+  opacity: 1;
+  background-color: #ff8800;
+}
+
+/* ====== CONTEÚDO PRINCIPAL ====== */
+.content {
+  padding: 20px 40px;
+  width: 100%;
+  margin-left: 60px;
+  transition: margin-left 0.3s ease;
+}
+.sidebar.expanded ~ .content {
+  margin-left: 220px;
+}
+
+/* ====== FORMULÁRIOS ====== */
+.form {
+  animation: fadeIn 0.4s ease;
+  max-width: 800px;
+  margin: 0 auto; /* Centraliza */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.row, .column {
+  gap: 16px;
+  margin-bottom: 20px;
+}
+label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+.icon-bar {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: orange;
+  outline: none;
+  background-color: #fffbe6;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+.icon-bar button {
+  font-size: 1.5em;
+  padding: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: transform 0.2s;
+}
+.icon-bar button:hover {
+  transform: scale(1.2);
+}
+.hidden {
+  display: none;
+}
+.alert-success {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #c3e6cb;
+}
+
+/* ====== FORMULÁRIO: CADASTRO DE EVENTOS ====== */
+.event-form-content {
+  display: flex;
+  gap: 40px;
+}
+.event-fields {
+  flex: 1;
+}
+.event-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-width: 120px;
+}
+.alerta-titulo {
+  font-weight: bold;
+}
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.event-fields input,
+.event-fields textarea,
+.event-fields select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+
+/* Foto do Discente */
+.photo-placeholder {
+  width: 220px;
+  height: 256px;
+  background-color: #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.photo-placeholder img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ====== TABELA ====== */
+.categoria-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.categoria-tabela th,
+.categoria-tabela td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+.categoria-tabela th {
+  background-color: #f0f0f0;
+}
+.categoria-tabela button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* ====== ANIMAÇÃO ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ====== RESPONSIVO ====== */
+@media (max-width: 768px) {
+  .horizontal-menu {
+    flex-direction: column;
+    margin-left: 0;
+  }
+  .form-header .form-selector {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .form-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .form-header {
+    padding: 0 20px;
+  }
+  .event-form-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .event-sidebar {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .radio-group {
+    flex-direction: row;
+    gap: 16px;
+  }
+  .photo-placeholder {
+    width: 100px;
+    height: 130px;
+  }
+}
