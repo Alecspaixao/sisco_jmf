@@ -41,6 +41,29 @@
 .sidebar.expanded {
   width: 220px; /* Largura quando expandida */
 }
+.horizontal-menu {
+  width: 100%;
+  background-color: #ff9900; /* ou a cor que quiser */
+  color: #fff;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Se quiser que os botões também se distribuam automaticamente: */
+.horizontal-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.horizontal-menu a:hover {
+  background: #ffcc80;
+}
 
 
 /* ========================================= */

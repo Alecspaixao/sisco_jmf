@@ -16,7 +16,7 @@ body {
 /* ====== SIDEBAR ====== */
 .sidebar {
   width: 60px;
-  background-color: #1d1c21;
+  background-color: #3300ff;
   color: white;
   overflow: hidden;
   transition: width 0.3s ease;

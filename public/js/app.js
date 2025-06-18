@@ -9,3 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+document.querySelectorAll('.edit-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    document.getElementById('eventoCategoria_id').value = button.dataset.id;
+    document.getElementById('eventoCategoria_nome').value = button.dataset.nome;
+    document.getElementById('eventoCategoria_descricao').value = button.dataset.desc;
+    document.getElementById('ocorrenciaCategoria_qtdAlerta').value = button.dataset.alerta;
+  });
+});

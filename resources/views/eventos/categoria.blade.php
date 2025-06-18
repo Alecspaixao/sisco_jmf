@@ -3,7 +3,7 @@
 @section('title', 'Categoria de Evento')
 
 @section('content')
-  <form method="POST" id="categoria" class="form">
+  <form method="POST" id="categoria" class="form" action="{{ route ('categoria.store')}}">
     @csrf
     <input type="hidden" name="eventoCategoria_id" id="eventoCategoria_id">
 
@@ -27,9 +27,8 @@
 
     <div class="icon-bar">
       <button type="submit" title="Salvar" name="btn_add_categoriaEvento">💾 Salvar</button>
-      <button type="button" title="Excluir" name="btn_excluir_categoriaEvento">🗑️</button>
       <button type="button" title="Limpar" name="btn_limparTela_categoria">🧹</button>
-      <button type="button" title="Atualizar" name="btn_update_categoriaEvento">🔄</button>
+      <button type="submit" title="Atualizar" name="btn_update_categoriaEvento">🔄</button>
       <button type="button" title="Documento" name="btn_listar_categoriaEvento">📄</button>
     </div>
   </form>
@@ -44,6 +43,8 @@
       <th>Nome</th>
       <th>Descrição</th>
       <th>Qtd Alerta</th>
+      <th>Excluir</th>
+      <th>Editar</th>
     </tr>
   </thead>
   <tbody>
@@ -53,7 +54,6 @@
     <td>{{ $cat->eventoCategoria_nome }}</td>
     <td>{{ $cat->eventoCategoria_descricao }}</td>
     <td>{{ $cat->ocorrenciaCategoria_qtdAlerta }}</td>
-    <td>Excluir</td>
     <td>
       <form action="{{ route('categoria.destroy', $cat->eventoCategoria_id) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir esta categoria?')">
         @csrf

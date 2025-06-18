@@ -4,8 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoCategoriaController;
 use App\Http\Controllers\EventoMotivoController;
 use App\Http\Controllers\CadEventoController;
+use App\Http\Controllers\ColaboradorController;
 
 Route::get('/', function () {
+    return view('index');
+});
+
+// Route::get('/', function () {
+//     return redirect()->route('categoria.index');
+// });
+
+Route::get('/eventos', function () {
     return redirect()->route('categoria.index');
 });
 
@@ -26,3 +35,11 @@ Route::get('/evento', [CadEventoController::class, 'index'])->name('evento.index
 Route::post('/evento', [CadEventoController::class, 'store'])->name('evento.store');
 Route::put('/evento/{id}', [CadEventoController::class, 'update'])->name('evento.update');
 Route::delete('/evento/{id}', [CadEventoController::class, 'destroy'])->name('evento.destroy');
+Route::post('/eventos/salvar', [CadEventoController::class, 'store'])->name('evento.store'); //Método Store
+
+//Rota Colaborador
+Route::get('/colaboradores', [ColaboradorController::class, 'buscar'])->name('colaboradores.buscar');
+
+
+//Rota temporária para ID
+Route::get('/eventos/proximo-id', [App\Http\Controllers\CadEventoController::class, 'proximoId']);

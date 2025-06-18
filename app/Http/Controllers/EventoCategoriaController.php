@@ -15,6 +15,19 @@ class EventoCategoriaController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->filled('eventoCategoria_id')) {
+            // Atualiza
+            $categoria = EventoCategoria::findOrFail($request->eventoCategoria_id);
+            $categoria->update($request->only([
+                'eventoCategoria_nome',
+                'eventoCategoria_descricao',
+                'ocorrenciaCategoria_qtdAlerta',
+            ]));
+
+            return redirect()->route('categoria.index')->with('success', 'Categoria atualizada com sucesso!');
+        }
+
+        // Cria nova
         EventoCategoria::create($request->only([
             'eventoCategoria_nome',
             'eventoCategoria_descricao',
@@ -23,6 +36,7 @@ class EventoCategoriaController extends Controller
 
         return redirect()->route('categoria.index')->with('success', 'Categoria cadastrada com sucesso!');
     }
+
 
     public function update(Request $request, $id)
     {
