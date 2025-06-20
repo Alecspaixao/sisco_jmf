@@ -5,6 +5,8 @@ use App\Http\Controllers\EventoCategoriaController;
 use App\Http\Controllers\EventoMotivoController;
 use App\Http\Controllers\CadEventoController;
 use App\Http\Controllers\ColaboradorController;
+use App\Http\Controllers\DiscenteController;
+use App\Http\Controllers\ResponsavelController;
 
 Route::get('/', function () {
     return view('index');
@@ -40,6 +42,8 @@ Route::post('/eventos/salvar', [CadEventoController::class, 'store'])->name('eve
 //Rota Colaborador
 Route::get('/colaboradores', [ColaboradorController::class, 'buscar'])->name('colaboradores.buscar');
 
+//Rota Discente
+Route::get('/discentes', [DiscenteController::class, 'buscar'])->name('discentes.buscar');
 
 //Rota temporária para ID
 Route::get('/eventos/proximo-id', [App\Http\Controllers\CadEventoController::class, 'proximoId']);

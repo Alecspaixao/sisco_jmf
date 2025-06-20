@@ -200,3 +200,127 @@ document.addEventListener('DOMContentLoaded', function () {
     inputId.value = selected.value;
   });
 });
+// Discentes
+const inputFiltroDiscente = document.getElementById('filtro_discente');
+const selectDiscente = document.getElementById('select_discente');
+const inputNomeDiscente = document.getElementById('discente_nome');
+const inputIdDiscente = document.getElementById('evento_idDiscente');
+
+// Filtro por nome
+inputFiltroDiscente.addEventListener('input', function () {
+  const termo = this.value.toLowerCase();
+
+  Array.from(selectDiscente.options).forEach(option => {
+    const texto = option.text.toLowerCase();
+    option.style.display = texto.includes(termo) ? 'block' : 'none';
+  });
+});
+
+// Ao selecionar
+selectDiscente.addEventListener('change', function () {
+  const selected = this.options[this.selectedIndex];
+  inputNomeDiscente.value = selected.text;
+  inputIdDiscente.value = selected.value;
+});
+document.getElementById('txt_psqDiscente').addEventListener('input', async function () {
+  let query = this.value.trim();
+
+  if (query.length < 2) return;
+
+  try {
+    let response = await fetch('/discentes?termo=' + encodeURIComponent(query));
+    let discentes = await response.json();
+
+    let datalist = document.getElementById('listaDiscentes');
+    datalist.innerHTML = '';
+
+    discentes.forEach(discente => {
+      let option = document.createElement('option');
+      option.value = discente.discente_nome;
+      option.dataset.id = discente.discente_matricula;
+      datalist.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Erro ao buscar discentes:', error);
+  }
+});
+
+document.getElementById('txt_psqDiscente').addEventListener('change', function () {
+  let datalist = document.getElementById('listaDiscentes');
+  let option = Array.from(datalist.options).find(opt => opt.value === this.value);
+
+  if (option) {
+    document.getElementById('discente_nome').value = option.value;
+    document.getElementById('evento_idDiscente').value = option.dataset.id;
+  }
+});
+document.getElementById('txt_psqResponsavel').addEventListener('input', async function () {
+  let query = this.value.trim();
+
+  if (query.length < 2) return;
+
+  try {
+    let response = await fetch('/responsaveis?termo=' + encodeURIComponent(query));
+    let responsaveis = await response.json();
+
+    let datalist = document.getElementById('listaResponsaveis');
+    datalist.innerHTML = '';
+
+    responsaveis.forEach(resp => {
+      let option = document.createElement('option');
+      option.value = resp.responsavel_nome;
+      option.dataset.id = resp.responsavel_matricula;
+      datalist.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Erro ao buscar responsáveis:', error);
+  }
+});
+
+document.getElementById('txt_psqResponsavel').addEventListener('change', function () {
+  let datalist = document.getElementById('listaResponsaveis');
+  let option = Array.from(datalist.options).find(opt => opt.value === this.value);
+
+  if (option) {
+    document.getElementById('responsavel_nome').value = option.value;
+    document.getElementById('evento_idResponsavel').value = option.dataset.id;
+  }
+});
+
+document.getElementById('txt_psqResponsavel').addEventListener('input', async function(){
+  let query = this.value.trim();
+
+  if (query.length < 3) return;
+
+  try {
+    let response = await fetch('/api/responsaveis?search=' + encodeURIComponent(query));
+    let responsaveis = await response.json();
+
+    let datalist = document.getElementById('listaResponsaveis');
+    datalist.innerHTML = '';
+    responsaveis.forEach(r => {
+      let option = document.createElement('option');
+      option.value = r.nome;
+      option.dataset.id = r.id;
+      datalist.appendChild(option);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+document.getElementById('txt_psqResponsavel').addEventListener('change', function(){
+  let option = Array.from(document.getElementById('listaResponsaveis').options).find(opt => opt.value === this.value);
+  if (option) {
+    document.getElementById('evento_idResponsavel').value = option.dataset.id;
+    document.getElementById('responsavel_nome').value = option.value;
+  }
+});
+
+//New Date const
+const inputDate = document.getElementById('evento_data');
+const inputTime = document.getElementById('evento_hora');
+
+console.log(inputDate, inputTime);

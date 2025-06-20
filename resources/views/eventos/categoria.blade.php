@@ -9,8 +9,8 @@
 
     <div class="row">
       <div class="column">
-        <label for="ocorrenciaCategoria_qtdAlerta">Quantidade para Alerta</label>
-        <input type="number" name="ocorrenciaCategoria_qtdAlerta" id="ocorrenciaCategoria_qtdAlerta" 
+        <label for="ocorreciaCategoria_qtdAlerta">Quantidade para Alerta</label>
+        <input type="number" name="ocorreciaCategoria_qtdAlerta" id="ocorreciaCategoria_qtdAlerta" 
               min="1" max="10" value="3" required>
       </div>
     </div>
@@ -53,7 +53,7 @@
     <td>{{ $cat->eventoCategoria_id }}</td>
     <td>{{ $cat->eventoCategoria_nome }}</td>
     <td>{{ $cat->eventoCategoria_descricao }}</td>
-    <td>{{ $cat->ocorrenciaCategoria_qtdAlerta }}</td>
+    <td>{{ $cat->ocorreciaCategoria_qtdAlerta }}</td>
     <td>
       <form action="{{ route('categoria.destroy', $cat->eventoCategoria_id) }}" method="POST" onsubmit="return confirm('Deseja realmente excluir esta categoria?')">
         @csrf
@@ -66,7 +66,7 @@
       data-id="{{ $cat->eventoCategoria_id }}"
       data-nome="{{ $cat->eventoCategoria_nome }}"
       data-desc="{{ $cat->eventoCategoria_descricao }}"
-      data-alerta="{{ $cat->ocorrenciaCategoria_qtdAlerta }}">
+      data-alerta="{{ $cat->ocorreciaCategoria_qtdAlerta }}">
       ✏️
     </button>
     </td>
@@ -75,5 +75,7 @@
 
   </tbody>
 </table>
+
+<script src="{{ asset('js/categoria.js') }}"></script>
 
 @endsection
